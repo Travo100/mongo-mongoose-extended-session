@@ -1,0 +1,45 @@
+<h1>Student Classroom</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            <th>Schedule</th>
+            <th>Honor Roll</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each student}}
+            <tr>
+                <td><a href="/student/{{this._id}}">{{this.firstName}}</a></td>
+                <td>{{this.lastName}}</td>
+                <td>{{this.age}}</td>
+                <td>{{this.schedule}}</td>
+                <td>{{this.isHonorRoll}}</td>
+                <td>
+                    <form action="/api/student/update" method="POST">
+                        <input type="hidden" name="id" value="{{this._id}}" >
+                        <input type="hidden" name="isHonorRoll" value="{{this.isHonorRoll}}" >
+                        <button type="submit">Update Honor Roll</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="/api/student/delete" method="POST">
+                        <input type="hidden" name="id" value="{{this._id}}" >
+                        <button type="submit">Delete Student</button>
+                    </form>
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+ <form action="/api/student" method="POST">
+    <input type="text" name="firstName" placeholder="first name">
+    <input type="text" name="lastName" placeholder="last name">
+    <input type="text" name="age" placeholder="age">
+    <input type="text" name="schedule" placeholder="schedule">
+    <button type="submit">Add Student</button>
+</form>
